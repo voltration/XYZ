@@ -1,0 +1,7 @@
+name: XYZ
+version: '${project.version}'
+main: gg.hecate.xyz.XYZ
+api-version: 1.17
+authors: [ voltration ]
+commands:
+  xyz:
