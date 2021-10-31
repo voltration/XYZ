@@ -5,31 +5,41 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 import static gg.hecate.util.Format.f;
 
 public class Command implements CommandExecutor {
+
+    private final XYZ plugin;
+
+    public Command(XYZ plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
+            if (args.length == 0) {
 
-            int x = (int) p.getLocation().getX();
-            int y = (int) p.getLocation().getY();
-            int z = (int) p.getLocation().getZ();
+                String x = String.valueOf((int) p.getLocation().getX());
+                String y = String.valueOf((int) p.getLocation().getY());
+                String z = String.valueOf((int) p.getLocation().getZ());
 
-            Bukkit.broadcastMessage(f("&x&7&4&6&C&C&0&lANNOUNCEMENT"));
-            Bukkit.broadcastMessage(f("&r"));
-            Bukkit.broadcastMessage(f("&x&7&4&6&C&C&0" + p.getDisplayName() + "&f shared their coordinates!"));
-            Bukkit.broadcastMessage(f("&x&7&4&6&C&C&0"
-                    + x
-                    + "&f, &x&7&4&6&C&C&0"
-                    + y
-                    + "&f, &x&7&4&6&C&C&0"
-                    + z
-                    ));
+                    Bukkit.broadcastMessage(f(Objects.requireNonNull(plugin.getConfig().getString("message"))
+                            .replace("{x}", x)
+                            .replace("{y}", y)
+                            .replace("{z}", z)
+                            .replace("{displayname}", p.getDisplayName())));
+            }
+
+            if (args.length == 1 && (args[0].equalsIgnoreCase("help"))) {
+                p.sendMessage(f(plugin.getConfig().getString("AuthorMessage")));
+
+            }
+
         }
-
         return true;
     }
 }

@@ -1,0 +1,16 @@
+
+# its possible to use hex colors with this format
+
+# &x&f&f&f&f&f&f
+# replacing the '#' with 'x'
+
+# {x}, {y}, {z}, {displayname}
+
+message: |
+  &6&nCoordinate Announcment
+  &6{displayname} &fannounced their coordinates!
+  &6{x}&f, &6{y}&f, &6{z}
+AuthorMessage: |-
+  &6&nXYZ Plugin
+  &fFor support or questions
+  &f@ &6https://github.com/voltration/
